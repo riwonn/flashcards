@@ -1085,6 +1085,16 @@ if (!load("fc_force_streak_14", false)) {
   save("fc_force_streak_14", true);
 }
 
+
+// one-time: force Lv.6 (1500 XP) + streak ≥ 14 (독립 플래그 — streak-only 마이그레이션과 별도)
+if (!load("fc_force_lvl6", false)) {
+  P.xp = Math.max(P.xp || 0, 1500);
+  P.streak = Math.max(P.streak || 0, 14);
+  P.lastDay = todayStr();
+  save("fc_progress", P);
+  save("fc_force_lvl6", true);
+}
+
 let lastSession = null; // 결과 화면 '다시 연습' 버튼용
 
 function fmtDuration(ms) {
